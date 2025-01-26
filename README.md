@@ -16,6 +16,7 @@ In order to use `pacman` for arch linux, install `ansible-galaxy collection inst
 Then run the playbook: `ansible-playbook -i inventory/inventory.ini playbooks/update_system.yaml --ask-become-pass` 
 
 Here:
+
     - `-i inventory/inventory.ini` will specify which inventory to use
     - `--ask-become-pass` will ask for the root password for the remote machines
 
