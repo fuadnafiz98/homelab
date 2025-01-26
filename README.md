@@ -17,7 +17,7 @@ Then run the playbook: `ansible-playbook -i inventory/inventory.ini playbooks/up
 
 Here:
 
-    - `-i inventory/inventory.ini` will specify which inventory to use
-    - `--ask-become-pass` will ask for the root password for the remote machines
+- `-i inventory/inventory.ini` will specify which inventory to use
+- `--ask-become-pass` will ask for the root password for the remote machines
 
 
