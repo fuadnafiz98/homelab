@@ -1,0 +1,9 @@
+---
+- name: Install Kubeadm on Arch Linux
+  hosts: arch_servers
+  become: true
+  tasks:
+    - name: Update Packages
+      pacman: 
+        update_cache: true
+
