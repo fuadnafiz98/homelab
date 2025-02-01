@@ -21,3 +21,15 @@ Here:
 - `--ask-become-pass` will ask for the root password for the remote machines
 
 
+
+## Kubernetes 
+
+- Enable kubelet: `sudo systemctl enable --now kubelet`
+
+- ` sudo kubeadm init --cri-socket=/run/containerd/containerd.sock`
+
+- Install Flannel: 
+
+`kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml`
+
+

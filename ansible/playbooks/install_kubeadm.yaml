@@ -6,4 +6,31 @@
     - name: Update Packages
       pacman: 
         update_cache: true
+    - name: Install kubeadm
+      pacman:
+        name: kubeadm 
+        state: present
+    - name: Install kubelet
+      pacman:
+        name: kubelet
+        state: present
+    - name: Install containerd
+      pacman:
+        name: containerd
+        state: present
+    - name: Enable containerd
+      ansible.builtin.systemd_service:
+        name: containerd.service
+        enabled: yes
+        state: started
+    - name: Enable kubelet
+      ansible.builtin.systemd_service:
+        name: kubelet.service
+        enabled: yes
+        state: started
+    - name: Install kubectl
+      pacman:
+        name: kubectl
+        state: present
+
 
