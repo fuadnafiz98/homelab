@@ -33,3 +33,60 @@ Here:
 `kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml`
 
 
+
+### Monitoring 
+
+we need node exporter for getting the stats. A good way for doing it is using `daemonSet` of K8s so it automatically installs `node-exporter` in every pod we will initiate. 
+
+We will use `hlem` as package manager. We will use this stack for promethus installation https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack 
+
+
+Initial installation:
+
+```bash
+
+ helm install prometheus prometheus-community/kube-prometheus-stack
+
+```
+
+Show Values:
+
+```bash
+
+helm show values prometheus-community/kube-prometheus-stack > values.yaml
+
+```
+
+Update:
+
+```bash
+
+helm install prometheus prometheus-community/kube-prometheus-stack -f values.yaml
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
