@@ -5,3 +5,8 @@ resources:
   - deployment.yaml
   - service.yaml
   - service-monitor.yaml
+
+configMapGenerator:
+  - name: nginx-config
+    files:
+      - nginx.conf

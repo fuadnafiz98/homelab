@@ -18,6 +18,12 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              readOnly: true
           resources:
             requests:
               cpu: 100m
@@ -25,3 +31,23 @@ spec:
             limits:
               cpu: 200m
               memory: 256Mi
+
+        - name: nginx-exporter
+          image: nginx/nginx-prometheus-exporter:latest
+          args:
+            - -nginx.scrape-uri=http://localhost:8080/nginx_status
+          ports:
+            - containerPort: 9113
+              name: metrics
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
