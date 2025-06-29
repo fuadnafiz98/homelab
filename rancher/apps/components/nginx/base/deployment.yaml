@@ -19,6 +19,8 @@ spec:
           ports:
             - containerPort: 80
               name: http
+            - containerPort: 8080
+              name: http-status
           volumeMounts:
             - name: nginx-config
               mountPath: /etc/nginx/nginx.conf
