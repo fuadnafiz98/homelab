@@ -11,5 +11,5 @@ spec:
       app: nginx
   endpoints:
     - port: metrics
-      path: /nginx_status
+      path: /metrics
       interval: 30s
