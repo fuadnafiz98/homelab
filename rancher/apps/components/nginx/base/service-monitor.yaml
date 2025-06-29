@@ -4,6 +4,7 @@ metadata:
   name: nginx-metrics
   labels:
     app: nginx
+    release: prometheus-stack
 spec:
   selector:
     matchLabels:
