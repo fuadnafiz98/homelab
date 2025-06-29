@@ -1,0 +1,70 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-stack
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: '75.6.1'
+    helm:
+      valuesObject:
+        # Local development overrides
+        prometheus:
+          prometheusSpec:
+            resources:
+              requests:
+                memory: 512Mi
+                cpu: 200m
+              limits:
+                memory: 1Gi
+                cpu: 500m
+
+        grafana:
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 100m
+            limits:
+              memory: 256Mi
+              cpu: 200m
+
+          # Enable useful dashboards
+          dashboardProviders:
+            dashboardproviders.yaml:
+              apiVersion: 1
+              providers:
+                - name: 'default'
+                  orgId: 1
+                  folder: ''
+                  type: file
+                  disableDeletion: false
+                  editable: true
+                  options:
+                    path: /var/lib/grafana/dashboards/default
+
+          dashboards:
+            default:
+              kubernetes-cluster:
+                gnetId: 7249
+                revision: 1
+                datasource: Prometheus
+              kubernetes-pods:
+                gnetId: 6417
+                revision: 1
+                datasource: Prometheus
+
+        # Enable monitoring for ArgoCD
+        kubeControllerManager:
+          enabled: false # Not available in Rancher Desktop
+        kubeEtcd:
+          enabled: false # Not available in Rancher Desktop
+        kubeScheduler:
+          enabled: false # Not available in Rancher Desktop
+        kubeProxy:
+          enabled: false # Not available in Rancher Desktop
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
