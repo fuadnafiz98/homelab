@@ -5,6 +5,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - service-monitor.yaml
+  # - ingress.yaml
 
 configMapGenerator:
   - name: nginx-config
