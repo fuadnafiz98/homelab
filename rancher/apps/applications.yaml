@@ -55,7 +55,7 @@ spec:
     targetRevision: 36.3.0
     helm:
       valueFiles:
-        - apps/components/traefik/overlays/local/values.yaml
+        - rancher/apps/components/traefik/overlays/local/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
