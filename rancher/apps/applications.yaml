@@ -52,7 +52,7 @@ spec:
   source:
     repoURL: https://traefik.github.io/charts
     chart: traefik
-    targetRevision: 36.6.0
+    targetRevision: 36.3.0
     helm:
       valueFiles:
         - rancher/apps/components/traefik/overlays/local/values.yaml
