@@ -4,7 +4,7 @@ metadata:
   name: nginx-ingress
   namespace: default
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
 spec:
   rules:
     - host: nginx.localhost
