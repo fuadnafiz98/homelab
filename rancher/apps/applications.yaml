@@ -54,8 +54,11 @@ spec:
     chart: traefik
     targetRevision: 36.3.0
     helm:
-      valueFiles:
-        - rancher/apps/components/traefik/overlays/local/values.yaml
+      values: |
+        ports:
+          web:
+            redirectTo:
+              port: websecure
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
