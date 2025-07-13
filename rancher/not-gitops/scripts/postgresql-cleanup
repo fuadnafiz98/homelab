@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e  # Exit on error
+
+echo "Starting cleanup of PostgreSQL resources..."
+
+kubectl delete statefulset postgres --ignore-not-found=true
+echo "StatefulSet deleted."
+
+kubectl delete pods -l app=postgres --ignore-not-found=true --force --grace-period=0
+echo "Pods deleted."
+
+kubectl delete service postgres --ignore-not-found=true
+echo "Services deleted."
+
+kubectl delete pvc -l app=postgres --ignore-not-found=true  # Catches data-postgres-*
+echo "PVCs deleted."
+
+kubectl delete pv $(kubectl get pv | grep postgres | awk '{print $1}') --ignore-not-found=true
+echo "PVs deleted."
+
+kubectl delete secret postgres-secret --ignore-not-found=true
+echo "Secret deleted."
+
+kubectl delete configmap postgres-config --ignore-not-found=true
+echo "ConfigMaps deleted."
+
+kubectl delete networkpolicy allow-postgres-internal --ignore-not-found=true
+echo "NetworkPolicy deleted."
+
+echo "Verifying no resources remain..."
+kubectl get all | grep -i postgres || echo "No 'all' resources found."
+kubectl get pvc,pv,secret,configmap,networkpolicy | grep -i postgres || echo "No storage/secrets/configs/policies found."
+
+echo "Cleanup complete! If anything is stuck, check 'kubectl get events' or force with patches."
