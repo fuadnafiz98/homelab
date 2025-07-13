@@ -27,9 +27,19 @@ pod ➡️ PVC ➡️ PV
 
 ### Storage Class
 
-provistions PV dynamically,<!--  -->
+provistions PV dynamically
 
 ### Kubernetes Operator
+
+### Basic Kubernetes PostgreSQL deployment
+
+1. `kubectl apply -f postgresql-pvc.yaml`
+1. `kubectl apply -f postgresql-configmap.yaml`
+1. `kubectl apply -f postgresql-secret.yaml`
+1. `kubectl apply -f postgresql-statefulset.yaml`
+1. `kubectl apply -f postgresql-service.yaml`
+1. `kubectl exec -it postgres-0 -- bash`
+1. `kubectl port-forward service/postgres 5432:5432`
 
 ### Resources
 
